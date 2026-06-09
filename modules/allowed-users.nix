@@ -1,0 +1,3 @@
+{
+  nix.allowedUsers = [ "@wheel" ];
+}
