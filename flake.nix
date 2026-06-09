@@ -7,6 +7,14 @@
 
   outputs = { self, nixpkgs }: {
 
+    nixosModules = {
+      complete = import ./configuration.nix;
+    };
+
+    nixosConfigurations.aarm64-linux.default = nixpkgs.lib.nixosSystem {
+      modules = [ self.nixosModules.complete ];
+    };
+
     packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
     packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
