@@ -5,11 +5,32 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs }:
+  
+  let
+    allModules = nixpkgs.lib.pipe (builtins.readDir ./modules)
+      [
+        builtins.attrNames
+        (map (name: builtins.replaceStrings [ ".nix" ] [ "" ] name))
+        (map (trimmed: {
+          name = trimmed;
+          value = import "${./modules}/${trimmed}.nix";
+        }))
+        builtins.listToAttrs
+      ];
+  in
 
-    nixosModules = {
-      complete = import ./configuration.nix;
-    };
+  {
+    extra = allModules;
+    nixosModules = 
+      allModules
+      //
+      {
+        complete.imports = (map
+          (module: "${./modules}/${module}")
+          (builtins.attrNames allModules)
+        );
+      };
 
     nixosConfigurations.aarm64-linux.default = nixpkgs.lib.nixosSystem {
       modules = [ self.nixosModules.complete ];

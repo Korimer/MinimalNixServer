@@ -1,11 +1,9 @@
 {
-  users.groups.korimer = {};
-  users.users.korimer = {
-    createHome = true;
-    group = "korimer";
+  users.groups.Administrator = {};
+  users.users.Administrator = {
+    description = "Service Admin";
+    createHome = false;
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio"];
-    description = "the goat";
-    password = "lol";
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 }
