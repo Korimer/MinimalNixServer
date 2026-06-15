@@ -41,7 +41,7 @@
     packages.x86_64-linux = {
       image = self.nixosConfigurations.default.config.system.build.image;
 
-      image-aarch64 = (self.nixosConfigurations.image.extendModules {
+      image-aarch64 = (self.nixosConfigurations.default.extendModules {
         modules = [
           {
             nixpkgs.buildPlatform = "x86_64-linux";
