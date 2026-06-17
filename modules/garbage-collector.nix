@@ -1,5 +1,5 @@
 {
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 30d";
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 }
