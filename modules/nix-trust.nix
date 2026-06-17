@@ -1,5 +1,5 @@
 {
-  nix.allowedUsers = [ "@wheel" ];
-  nix.settings.trustedUsers = [ "root" "@wheel" ];
+  nix.settings.allowed-users = [ "@wheel" ];
+  nix.settings.trusted-users = [ "@wheel" ];
   networking.wireless.enable = false;
 }
