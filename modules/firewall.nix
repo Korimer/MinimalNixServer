@@ -1,4 +1,4 @@
 {
   networking.firewall.enable = true;
-  networking.wireless.enable = false;
+  #networking.wireless.enable = false;
 }
